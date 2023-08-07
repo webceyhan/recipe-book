@@ -12,6 +12,15 @@ class IngredientSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // sample ingredients
+        $ingredients = ['Tomato', 'Bread', 'Cheese', 'Butter', 'Garlic'];
+
+        // populate ingredients table
+        foreach ($ingredients as $ingredient) {
+            \App\Models\Ingredient::factory()
+                ->create([
+                    'name' => $ingredient,
+                ]);
+        }
     }
 }
