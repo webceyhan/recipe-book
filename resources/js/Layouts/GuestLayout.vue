@@ -10,7 +10,7 @@ import { Link } from "@inertiajs/vue3";
       <Link :href="route('ingredients.index')">Ingredients</Link>
     </header>
 
-    <main class="w-full space-y-4">
+    <main class="w-full space-y-8">
       <slot />
     </main>
   </div>
