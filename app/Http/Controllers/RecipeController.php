@@ -13,7 +13,11 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::all();
+        $name = request('name');
+
+        $recipes = Recipe::query()
+            ->when($name, fn ($query) => $query->where('name', 'like', "%{$name}%"))
+            ->get();
 
         return inertia('Recipes/Index', [
             'recipes' => $recipes,
