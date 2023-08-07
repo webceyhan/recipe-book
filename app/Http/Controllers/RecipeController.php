@@ -13,7 +13,11 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        //
+        $recipes = Recipe::all();
+
+        return inertia('Recipes/Index', [
+            'recipes' => $recipes,
+        ]);
     }
 
     /**
