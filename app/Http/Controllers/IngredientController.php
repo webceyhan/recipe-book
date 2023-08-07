@@ -33,7 +33,12 @@ class IngredientController extends Controller
      */
     public function store(StoreIngredientRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        Ingredient::create($data);
+
+        return redirect()->route('ingredients.index')
+            ->with('status', 'Ingredient created.');
     }
 
     /**
@@ -65,6 +70,9 @@ class IngredientController extends Controller
      */
     public function destroy(Ingredient $ingredient)
     {
-        //
+        $ingredient->delete();
+
+        return redirect()->route('ingredients.index')
+            ->with('status', 'Ingredient deleted.');
     }
 }

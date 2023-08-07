@@ -1,6 +1,7 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+import IngredientList from "@/Components/IngredientList.vue";
 
 defineProps({
   ingredients: {
@@ -8,6 +9,17 @@ defineProps({
     default: () => [],
   },
 });
+
+const form = useForm({
+  name: "",
+});
+
+function addIngredient() {
+  form.post(route("ingredients.store"), {
+    onSuccess: () => form.reset(),
+    preserveState: true,
+  });
+}
 </script>
 
 <template>
@@ -16,10 +28,17 @@ defineProps({
 
     <h1 class="text-3xl bold">Ingredients</h1>
 
-    <ul>
-      <li v-for="(ingredient, i) in ingredients" :key="i">
-        {{ ingredient.name }}
-      </li>
-    </ul>
+    <form @submit.prevent="addIngredient()" class="flex gap-4">
+      <input
+        type="text"
+        placeholder="new ingredient..."
+        class="input input-bordered w-full max-w-xs"
+        v-model="form.name"
+      />
+      <button type="submit" class="btn btn-primary">add</button>
+    </form>
+
+    <IngredientList :ingredients="ingredients" canDelete />
+      
   </GuestLayout>
 </template>
