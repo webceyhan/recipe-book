@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Cuisine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class RecipeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->words(3, true),
+            'cuisine' => fake()->randomElement(Cuisine::values()),
+            'instructions' => fake()->paragraphs(3, true),
+            'image_url' => fake()->imageUrl(),
         ];
     }
 }
