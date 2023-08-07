@@ -1,6 +1,7 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import IngredientList from "@/Components/IngredientList.vue";
 
 defineProps({
   recipe: {
@@ -27,8 +28,17 @@ defineProps({
       <div class="badge badge-secondary">{{ recipe.cuisine }}</div>
     </header>
 
+    <!-- ingredients -->
+    <section>
+      <h2 class="text-lg font-bold mb-2">Ingredients</h2>
+    <IngredientList :ingredients="recipe.ingredients" />
+    </section>
+
     <!-- instructions -->
-    <pre class="whitespace-pre-wrap font-sans" v-html="recipe.instructions" />
+    <section>
+      <h2 class="text-lg font-bold mb-2">Instructions</h2>
+      <pre class="whitespace-pre-wrap font-sans" v-html="recipe.instructions" />
+    </section>
 
     <!-- actions -->
     <footer class="flex items-center gap-4">
