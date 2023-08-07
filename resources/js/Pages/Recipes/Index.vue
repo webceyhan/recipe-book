@@ -1,6 +1,7 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import RecipeCard from "@/Components/RecipeCard.vue";
 
 defineProps({
   recipes: {
@@ -16,10 +17,9 @@ defineProps({
 
     <h1 class="text-3xl bold">Recipes</h1>
 
-    <ul>
-      <li v-for="(recipe, i) in recipes" :key="i">
-        {{ recipe.name }}
-      </li>
-    </ul>
+    <!-- card list -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <RecipeCard v-for="(recipe, i) in recipes" :key="i" :recipe="recipe" />
+    </div>
   </GuestLayout>
 </template>
