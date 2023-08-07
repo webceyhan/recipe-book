@@ -4,11 +4,13 @@ import { Link } from "@inertiajs/vue3";
 
 <template>
   <div class="w-full max-w-5xl mx-auto p-8 space-y-8">
-    <header class="shadow">
+    <header class="flex items-center gap-x-4 shadow">
       <Link href="/">Home </Link>
+      <Link :href="route('recipes.index')">Recipes</Link>
+      <Link :href="route('ingredients.index')">Ingredients</Link>
     </header>
 
-    <main class="w-full">
+    <main class="w-full space-y-4">
       <slot />
     </main>
   </div>
