@@ -1,10 +1,16 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
 
+defineEmits(["delete"]);
+
 defineProps({
   ingredients: {
     type: Array,
     default: () => [],
+  },
+  canDelete: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
@@ -14,7 +20,7 @@ defineProps({
     <li
       v-for="(ingredient, i) in ingredients"
       :key="i"
-      class="flex justify-between items-center"
+      class="flex justify-between items-center p-2"
     >
       <div>{{ ingredient.name }}</div>
 
@@ -23,7 +29,15 @@ defineProps({
           {{ ingredient.pivot.quantity }}
         </span>
 
-        <slot name="actions" />
+        <Link
+          v-if="canDelete"
+          :href="route('ingredients.destroy', ingredient.id)"
+          class="btn btn-xs btn-error btn-outline"
+          method="delete"
+          as="button"
+        >
+          x
+        </Link>
       </div>
     </li>
   </ul>
