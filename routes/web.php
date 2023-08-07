@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecipeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,3 +21,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', []);
 });
+
+
+Route::resource('ingredients', IngredientController::class);
+Route::resource('recipes', RecipeController::class);
