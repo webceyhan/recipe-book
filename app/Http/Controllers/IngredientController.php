@@ -13,7 +13,11 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        $ingredients = Ingredient::all();
+
+        return inertia('Ingredients/Index', [
+            'ingredients' => $ingredients,
+        ]);
     }
 
     /**
