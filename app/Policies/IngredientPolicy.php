@@ -45,13 +45,8 @@ class IngredientPolicy
      */
     public function delete(?User $user, Ingredient $ingredient): bool
     {
-        $count = $ingredient->loadCount('recipes')->recipes_count;
-
-        if ($count > 0) {
-            return false;
-        }
-
-        return true;
+        // allow if ingredient has no recipes
+        return $ingredient->recipes->count() === 0;
     }
 
     /**
