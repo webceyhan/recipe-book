@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Cuisine;
 use App\Http\Requests\StoreRecipeRequest;
 use App\Http\Requests\UpdateRecipeRequest;
 use App\Models\Recipe;
@@ -14,13 +15,17 @@ class RecipeController extends Controller
     public function index()
     {
         $name = request('name');
+        $cuisine = request('cuisine');
 
         $recipes = Recipe::query()
             ->when($name, fn ($query) => $query->where('name', 'like', "%{$name}%"))
+            ->when($cuisine, fn ($query) => $query->where('cuisine', $cuisine))
             ->get();
 
         return inertia('Recipes/Index', [
             'recipes' => $recipes,
+            'cuisine' => $cuisine,
+            'cuisineOptions' => Cuisine::values()
         ]);
     }
 
