@@ -1,6 +1,6 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import IngredientList from "@/Components/IngredientList.vue";
 
 defineProps({
@@ -39,6 +39,5 @@ function addIngredient() {
     </form>
 
     <IngredientList :ingredients="ingredients" canDelete />
-      
   </GuestLayout>
 </template>

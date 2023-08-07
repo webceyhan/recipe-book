@@ -37,8 +37,7 @@ class IngredientController extends Controller
 
         Ingredient::create($data);
 
-        return redirect()->route('ingredients.index')
-            ->with('status', 'Ingredient created.');
+        return redirect()->route('ingredients.index');
     }
 
     /**
@@ -72,7 +71,6 @@ class IngredientController extends Controller
     {
         $ingredient->delete();
 
-        return redirect()->route('ingredients.index')
-            ->with('status', 'Ingredient deleted.');
+        return redirect()->route('ingredients.index');
     }
 }
