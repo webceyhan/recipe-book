@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('instructions');
+            $table->string('image_url');
+            $table->enum('cuisine', ['american', 'italian', 'mexican', 'asian', 'french', 'indian', 'other']);
             $table->timestamps();
         });
     }
