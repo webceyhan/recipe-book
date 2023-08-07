@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Cuisine;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('instructions');
             $table->string('image_url');
-            $table->enum('cuisine', ['american', 'italian', 'mexican', 'asian', 'french', 'indian', 'other']);
+            $table->enum('cuisine', Cuisine::values())->default(Cuisine::Other->value);
             $table->timestamps();
         });
     }
