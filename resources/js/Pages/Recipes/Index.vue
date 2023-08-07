@@ -1,5 +1,5 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import RecipeCard from "@/Components/RecipeCard.vue";
 import RecipeSearchFilter from "@/Components/RecipeSearchFilter.vue";
@@ -25,7 +25,14 @@ defineProps({
   <GuestLayout>
     <Head title="Recipes" />
 
-    <h1 class="text-3xl bold">Recipes</h1>
+    <div class="flex justify-between items-center">
+      <h1 class="text-3xl bold">Recipes</h1>
+      <Link
+        :href="route('recipes.create')"
+        class="btn btn-primary shadow rounded-3xl"
+        >create</Link
+      >
+    </div>
 
     <RecipeSearchFilter />
     <RecipeCuisineFilter :options="cuisineOptions" :value="cuisine" />
