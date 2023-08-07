@@ -1,5 +1,6 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
+import { onUnmounted } from "vue";
 
 defineEmits(["delete"]);
 
@@ -14,21 +15,24 @@ defineProps({
   },
 });
 
-function deleteIngredient(id) {
-  try {
-    router.delete(route("ingredients.destroy", id), {
-    preserveState: true,
-  });
-  } catch (error) {
-    // doesn't work yet!
-    console.log(error);
-  }
-  finally {
-    console.log('error finished')
-  }
+// global even for invalid responses
+const removeListener = router.on("invalid", (event) => {
+  // get the response status code
+  const { status } = event.detail.response;
 
-  
-}
+  // handle if the response is 403
+  if (status === 403) {
+    // prevent default popup behavior
+    event.preventDefault();
+
+    // handle the error as you wish...
+    alert("Ingredient is in use. Cannot be deleted!");
+  }
+});
+
+onUnmounted(() => {
+  removeListener();
+});
 </script>
 
 <template>
@@ -45,13 +49,15 @@ function deleteIngredient(id) {
           {{ ingredient.pivot.quantity }}
         </span>
 
-        <button
+        <Link
           v-if="canDelete"
+          :href="route('ingredients.destroy', ingredient.id)"
           class="btn btn-xs btn-error btn-outline"
-          @click="deleteIngredient(ingredient.id)"
+          method="delete"
+          as="button"
         >
           x
-        </button>
+        </Link>
       </div>
     </li>
   </ul>
