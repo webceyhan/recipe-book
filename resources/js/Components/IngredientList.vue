@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
 defineEmits(["delete"]);
 
@@ -13,6 +13,22 @@ defineProps({
     default: false,
   },
 });
+
+function deleteIngredient(id) {
+  try {
+    router.delete(route("ingredients.destroy", id), {
+    preserveState: true,
+  });
+  } catch (error) {
+    // doesn't work yet!
+    console.log(error);
+  }
+  finally {
+    console.log('error finished')
+  }
+
+  
+}
 </script>
 
 <template>
@@ -29,15 +45,13 @@ defineProps({
           {{ ingredient.pivot.quantity }}
         </span>
 
-        <Link
+        <button
           v-if="canDelete"
-          :href="route('ingredients.destroy', ingredient.id)"
           class="btn btn-xs btn-error btn-outline"
-          method="delete"
-          as="button"
+          @click="deleteIngredient(ingredient.id)"
         >
           x
-        </Link>
+        </button>
       </div>
     </li>
   </ul>
