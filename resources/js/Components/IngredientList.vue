@@ -1,6 +1,7 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
 import { onUnmounted } from "vue";
+import Badge from "./Badge.vue";
 
 defineEmits(["delete"]);
 
@@ -45,9 +46,9 @@ onUnmounted(() => {
       <div>{{ ingredient.name }}</div>
 
       <div>
-        <span v-if="ingredient.pivot" class="badge badge-ghost">
+        <Badge v-if="ingredient.pivot" ghost>
           {{ ingredient.pivot.quantity }}
-        </span>
+        </Badge>
 
         <Link
           v-if="canDelete"

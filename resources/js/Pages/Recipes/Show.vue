@@ -2,6 +2,7 @@
 import { Head, Link } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import IngredientList from "@/Components/IngredientList.vue";
+import Badge from "@/Components/Badge.vue";
 
 defineProps({
   recipe: {
@@ -25,13 +26,13 @@ defineProps({
       <h1 class="text-3xl bold capitalize">{{ recipe.name }}</h1>
 
       <!-- cuisine -->
-      <div class="badge badge-secondary">{{ recipe.cuisine }}</div>
+      <Badge>{{ recipe.cuisine }}</Badge>
     </header>
 
     <!-- ingredients -->
     <section>
       <h2 class="text-lg font-bold mb-2">Ingredients</h2>
-    <IngredientList :ingredients="recipe.ingredients" />
+      <IngredientList :ingredients="recipe.ingredients" />
     </section>
 
     <!-- instructions -->
