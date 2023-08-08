@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import Badge from './Badge.vue';
 
 defineProps({
   recipe: {
@@ -23,7 +24,7 @@ defineProps({
 
       <div class="card-actions justify-between items-center">
         <!-- cuisine -->
-        <div class="badge badge-secondary">{{ recipe.cuisine }}</div>
+        <Badge>{{ recipe.cuisine }}</Badge>
 
         <!-- read button -->
         <Link
