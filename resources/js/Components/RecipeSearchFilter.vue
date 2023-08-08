@@ -1,5 +1,6 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
+import Input from "./Input.vue";
 
 const handleSearch = (name) => {
   router.reload({
@@ -10,13 +11,12 @@ const handleSearch = (name) => {
 </script>
 
 <template>
-  <div class="w-full">
+  <div>
     <h6 class="text-sm font-bold uppercase mb-2">Search by name</h6>
-    <input
+    <Input
       type="search"
       placeholder="type something..."
-      class="input input-bordered w-full max-w-md"
-      @input="handleSearch($event.target.value)"
+      @update:model-value="handleSearch"
     />
   </div>
 </template>
