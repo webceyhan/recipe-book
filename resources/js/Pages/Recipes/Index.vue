@@ -1,9 +1,10 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import RecipeCard from "@/Components/RecipeCard.vue";
 import RecipeSearchFilter from "@/Components/RecipeSearchFilter.vue";
 import RecipeCuisineFilter from "@/Components/RecipeCuisineFilter.vue";
+import Button from "@/Components/Button.vue";
 
 defineProps({
   recipes: {
@@ -27,11 +28,7 @@ defineProps({
 
     <div class="flex justify-between items-center">
       <h1 class="text-3xl bold">Recipes</h1>
-      <Link
-        :href="route('recipes.create')"
-        class="btn btn-primary shadow rounded-3xl"
-        >create</Link
-      >
+      <Button :href="route('recipes.create')" class="rounded-full" large> create </Button>
     </div>
 
     <RecipeSearchFilter />
