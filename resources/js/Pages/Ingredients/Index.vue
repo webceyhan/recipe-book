@@ -3,6 +3,7 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import IngredientList from "@/Components/IngredientList.vue";
 import Button from "@/Components/Button.vue";
+import Input from "@/Components/Input.vue";
 
 defineProps({
   ingredients: {
@@ -30,12 +31,7 @@ function addIngredient() {
     <h1 class="text-3xl bold">Ingredients</h1>
 
     <form @submit.prevent="addIngredient()" class="flex gap-4">
-      <input
-        type="text"
-        placeholder="new ingredient..."
-        class="input input-bordered w-full max-w-xs"
-        v-model="form.name"
-      />
+      <Input placeholder="new ingredient..." v-model="form.name" />
       <Button type="submit">add</Button>
     </form>
 
