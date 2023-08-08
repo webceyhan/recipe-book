@@ -1,10 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import Button from "@/Components/Button.vue";
+import FormControl from "@/Components/FormControl.vue";
+import Input from "@/Components/Input.vue";
 
-const { recipe, ingredients } = defineProps({
+const { recipe, ingredients, ingredientOptions } = defineProps({
   recipe: {
     type: Object,
     default: () => ({}),
@@ -46,18 +48,25 @@ function handleSubmit() {
   }
 }
 
-const newIngredient = ref(null);
+const normalizedIngredientOptions = computed(() => {
+  return ingredientOptions.map((opt) => ({
+    label: opt.name,
+    value: opt.id,
+  }));
+});
+
+const newIngredientId = ref(null);
 
 function addIngredient() {
-  if (!newIngredient) return;
+  if (!newIngredientId.value) return;
 
   form.ingredients.push({
-    id: newIngredient.value.id,
-    name: newIngredient.value.name,
+    id: newIngredientId.value,
+    name: ingredientOptions.find(({ id }) => id === +newIngredientId.value).name,
     quantity: 1,
   });
 
-  newIngredient.value = null;
+  newIngredientId.value = null;
 }
 
 function removeIngredient(index) {
@@ -73,49 +82,27 @@ function removeIngredient(index) {
 
     <form class="w-full space-y-4" @submit.prevent>
       <!-- name -->
-      <div class="form-control w-full max-w-xl">
-        <label class="label">
-          <span class="label-text">Recipe name</span>
-        </label>
-        <input type="text" class="input input-bordered w-full" v-model="form.name" />
-      </div>
+      <FormControl label="Recipe Name" v-model="form.name" />
 
       <!-- picture -->
-      <div class="form-control w-full">
-        <label class="label">
-          <span class="label-text">Upload picture</span>
-        </label>
-        <input
-          type="file"
-          class="file-input file-input-bordered w-full max-w-sm"
-          @input="form.picture = $event.target.files[0]"
-        />
-      </div>
+      <FormControl label="Upload picture" type="file" v-model="form.picture" />
 
       <!-- cuisine -->
-      <div class="form-control w-full">
-        <label class="label">
-          <span class="label-text">Select cuisine</span>
-        </label>
-        <select class="select select-bordered w-full max-w-xs" v-model="form.cuisine">
-          <option v-for="opt in cuisineOptions" :key="opt" :value="opt">
-            {{ opt }}
-          </option>
-        </select>
-      </div>
+      <FormControl
+        label="Select cuisine"
+        :options="cuisineOptions"
+        v-model="form.cuisine"
+      />
 
       <!-- ingredients -->
       <section>
-        <label class="label">
-          <span class="label-text">Ingredients</span>
-        </label>
+        <div class="flex items-end gap-x-4">
+          <FormControl
+            label="Select ingredient"
+            :options="normalizedIngredientOptions"
+            v-model="newIngredientId"
+          />
 
-        <div class="flex items-center gap-x-4">
-          <select class="select select-bordered w-full max-w-md" v-model="newIngredient">
-            <option v-for="opt in ingredientOptions" :key="opt.id" :value="opt">
-              {{ opt.name }}
-            </option>
-          </select>
           <Button ghost @click="addIngredient()"> add new ingredient </Button>
         </div>
 
@@ -127,11 +114,7 @@ function removeIngredient(index) {
           >
             <span class="w-full" v-html="ingredient.name" />
 
-            <input
-              type="number"
-              class="input input-sm input-bordered w-24"
-              v-model="ingredient.quantity"
-            />
+            <Input type="number" class="w-24" v-model="ingredient.quantity" />
 
             <Button danger small @click="removeIngredient(i)">x</Button>
           </li>
@@ -139,16 +122,7 @@ function removeIngredient(index) {
       </section>
 
       <!-- instructions -->
-      <div class="form-control w-full">
-        <label class="label">
-          <span class="label-text">Instructions</span>
-        </label>
-        <textarea
-          class="textarea textarea-bordered"
-          rows="5"
-          v-model="form.instructions"
-        />
-      </div>
+      <FormControl label="Instructions" rows="5" v-model="form.instructions" />
 
       <!-- actions -->
       <div class="flex justify-end gap-4">
