@@ -1,8 +1,8 @@
 <script setup>
-import { Head, Link, useForm } from "@inertiajs/vue3";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import IngredientList from "@/Components/IngredientList.vue";
 import { ref } from "vue";
+import { Head, useForm } from "@inertiajs/vue3";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
+import Button from "@/Components/Button.vue";
 
 const { recipe, ingredients } = defineProps({
   recipe: {
@@ -104,50 +104,39 @@ function removeIngredient(index) {
         </select>
       </div>
 
-        <!-- ingredients -->
-        <section>
-          <label class="label">
-            <span class="label-text">Ingredients</span>
-          </label>
+      <!-- ingredients -->
+      <section>
+        <label class="label">
+          <span class="label-text">Ingredients</span>
+        </label>
 
-          <div class="flex items-center gap-x-4">
-            <select
-              class="select select-bordered w-full max-w-md"
-              v-model="newIngredient"
-            >
-              <option v-for="opt in ingredientOptions" :key="opt.id" :value="opt">
-                {{ opt.name }}
-              </option>
-            </select>
-            <button class="btn btn-primary btn-outline" @click="addIngredient()">
-              add new ingredient
-            </button>
-          </div>
+        <div class="flex items-center gap-x-4">
+          <select class="select select-bordered w-full max-w-md" v-model="newIngredient">
+            <option v-for="opt in ingredientOptions" :key="opt.id" :value="opt">
+              {{ opt.name }}
+            </option>
+          </select>
+          <Button ghost @click="addIngredient()"> add new ingredient </Button>
+        </div>
 
-          <ul class="divide-y divide-y-1 divide-gray-200">
-            <li
-              v-for="(ingredient, i) in form.ingredients"
-              class="flex items-center justify-between py-2 max-w-md space-x-4"
-              :key="i"
-            >
-              <span class="w-full" v-html="ingredient.name" />
+        <ul class="divide-y divide-y-1 divide-gray-200">
+          <li
+            v-for="(ingredient, i) in form.ingredients"
+            class="flex items-center justify-between py-2 max-w-md space-x-4"
+            :key="i"
+          >
+            <span class="w-full" v-html="ingredient.name" />
 
-              <input
-                type="number"
-                class="input input-sm input-bordered w-24"
-                v-model="ingredient.quantity"
-              />
+            <input
+              type="number"
+              class="input input-sm input-bordered w-24"
+              v-model="ingredient.quantity"
+            />
 
-              <button
-                type="button"
-                class="btn btn-sm btn-error btn-outline"
-                @click="removeIngredient(i)"
-              >
-                X
-              </button>
-            </li>
-          </ul>
-        </section>
+            <Button danger small @click="removeIngredient(i)">x</Button>
+          </li>
+        </ul>
+      </section>
 
       <!-- instructions -->
       <div class="form-control w-full">
@@ -163,11 +152,8 @@ function removeIngredient(index) {
 
       <!-- actions -->
       <div class="flex justify-end gap-4">
-        <button class="btn btn-secondary btn-outline" @click="back()">Cancel</button>
-
-        <button type="button" class="btn btn-primary" @click="handleSubmit()">
-          Save
-        </button>
+        <Button @click="back()" ghost>Cancel</Button>
+        <Button @click="handleSubmit()"> Save </Button>
       </div>
     </form>
   </GuestLayout>

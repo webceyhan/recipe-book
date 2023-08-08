@@ -1,7 +1,8 @@
 <script setup>
-import { Link, router } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 import { onUnmounted } from "vue";
 import Badge from "./Badge.vue";
+import Button from "./Button.vue";
 
 defineEmits(["delete"]);
 
@@ -50,15 +51,15 @@ onUnmounted(() => {
           {{ ingredient.pivot.quantity }}
         </Badge>
 
-        <Link
+        <Button
           v-if="canDelete"
           :href="route('ingredients.destroy', ingredient.id)"
-          class="btn btn-xs btn-error btn-outline"
           method="delete"
-          as="button"
+          danger
+          small
         >
           x
-        </Link>
+        </Button>
       </div>
     </li>
   </ul>

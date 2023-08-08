@@ -2,6 +2,7 @@
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import IngredientList from "@/Components/IngredientList.vue";
+import Button from "@/Components/Button.vue";
 
 defineProps({
   ingredients: {
@@ -35,7 +36,7 @@ function addIngredient() {
         class="input input-bordered w-full max-w-xs"
         v-model="form.name"
       />
-      <button type="submit" class="btn btn-primary">add</button>
+      <Button type="submit">add</Button>
     </form>
 
     <IngredientList :ingredients="ingredients" canDelete />

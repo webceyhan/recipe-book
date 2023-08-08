@@ -1,8 +1,9 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import IngredientList from "@/Components/IngredientList.vue";
 import Badge from "@/Components/Badge.vue";
+import Button from "@/Components/Button.vue";
 
 defineProps({
   recipe: {
@@ -43,18 +44,11 @@ defineProps({
 
     <!-- actions -->
     <footer class="flex items-center gap-4">
-      <Link :href="route('recipes.edit', recipe.id)" class="btn btn-sm btn-primary">
-        edit
-      </Link>
+      <Button :href="route('recipes.edit', recipe.id)"> edit </Button>
 
-      <Link
-        :href="route('recipes.destroy', recipe.id)"
-        class="btn btn-sm btn-error btn-outline"
-        method="delete"
-        as="button"
-      >
+      <Button :href="route('recipes.destroy', recipe.id)" method="delete" danger>
         delete
-      </Link>
+      </Button>
     </footer>
   </GuestLayout>
 </template>

@@ -1,6 +1,6 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import Badge from './Badge.vue';
+import Badge from "./Badge.vue";
+import Button from "./Button.vue";
 
 defineProps({
   recipe: {
@@ -27,12 +27,7 @@ defineProps({
         <Badge>{{ recipe.cuisine }}</Badge>
 
         <!-- read button -->
-        <Link
-          :href="route('recipes.show', recipe.id)"
-          class="btn btn-sm btn-primary btn-outline"
-        >
-          read
-        </Link>
+        <Button :href="route('recipes.show', recipe.id)" ghost small> read </Button>
       </div>
     </div>
   </div>
