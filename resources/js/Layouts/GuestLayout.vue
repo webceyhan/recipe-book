@@ -1,6 +1,6 @@
 <script setup>
 import { Link, usePage } from "@inertiajs/vue3";
-import { ref, watch } from "vue";
+import { ref, computed, watch } from "vue";
 
 const links = [
   {
@@ -25,12 +25,11 @@ const flashToast = async (message) => {
   toastShown.value = false;
 };
 
-watch(
-  () => usePage().props,
-  ({ status }) => flashToast(status)
-);
+const status = computed(() => usePage().props.status);
 
-usePage().props.status && flashToast(usePage().props.status);
+watch(status, (value) => flashToast(value));
+
+status.value && flashToast(status.value);
 </script>
 
 <template>
