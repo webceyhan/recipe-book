@@ -1,5 +1,6 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
 
 const links = [
   {
@@ -11,6 +12,25 @@ const links = [
     route: "ingredients.index",
   },
 ];
+
+const delay = (ms = 1000) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const toastShown = ref(false);
+const toastMessage = ref("");
+
+const flashToast = async (message) => {
+  toastMessage.value = message;
+  toastShown.value = true;
+  await delay(3000); // wait 3 seconds
+  toastShown.value = false;
+};
+
+watch(
+  () => usePage().props,
+  ({ status }) => flashToast(status)
+);
+
+usePage().props.status && flashToast(usePage().props.status);
 </script>
 
 <template>
@@ -43,5 +63,11 @@ const links = [
     <main class="w-full space-y-8">
       <slot />
     </main>
+
+    <div class="toast" v-if="toastShown">
+      <div class="alert alert-info">
+        <span>{{ toastMessage }}</span>
+      </div>
+    </div>
   </div>
 </template>
