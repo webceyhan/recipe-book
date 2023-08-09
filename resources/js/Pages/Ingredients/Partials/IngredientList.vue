@@ -3,6 +3,8 @@ import { router } from "@inertiajs/vue3";
 import { onUnmounted } from "vue";
 import Badge from "@/Components/Badge.vue";
 import Button from "@/Components/Button.vue";
+import List from "@/Components/List.vue";
+import ListItem from "@/Components/ListItem.vue";
 
 defineEmits(["delete"]);
 
@@ -38,12 +40,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <ul class="divide-y divide-y-1 divide-gray-200">
-    <li
-      v-for="(ingredient, i) in ingredients"
-      :key="i"
-      class="flex justify-between items-center p-2"
-    >
+  <List>
+    <ListItem v-for="(ingredient, i) in ingredients" :key="i">
       <div>{{ ingredient.name }}</div>
 
       <div>
@@ -61,6 +59,6 @@ onUnmounted(() => {
           x
         </Button>
       </div>
-    </li>
-  </ul>
+    </ListItem>
+  </List>
 </template>
