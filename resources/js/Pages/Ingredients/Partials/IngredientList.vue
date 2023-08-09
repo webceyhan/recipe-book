@@ -6,8 +6,6 @@ import Button from "@/Components/Button.vue";
 import List from "@/Components/List.vue";
 import ListItem from "@/Components/ListItem.vue";
 
-defineEmits(["delete"]);
-
 defineProps({
   ingredients: {
     type: Array,
