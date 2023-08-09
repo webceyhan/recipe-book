@@ -1,19 +1,27 @@
 <script setup>
-import { ref, watch } from "vue";
-import { delay } from "@/utils";
+import { watch } from "vue";
+import { useFlash } from "@/utils";
+import { computed } from "vue";
 
 const props = defineProps({
   message: String,
   flashable: Boolean,
 });
 
-const shown = ref(!props.flashable);
+const { shown, flash } = useFlash(!props.flashable);
 
-const flash = async () => {
-  shown.value = true;
-  await delay(3000); // wait 3 seconds
-  shown.value = false;
+const variants = {
+  created: "alert-success",
+  updated: "alert-info",
+  deleted: "alert-error",
 };
+
+// change the variant based on the action
+// parsed from the message prop
+const variant = computed(() => {
+  const [action] = props.message.match(/created|updated|deleted/);
+  return variants[action] ?? "alert-info";
+});
 
 if (props.flashable) {
   watch(
@@ -25,7 +33,7 @@ if (props.flashable) {
 </script>
 
 <template>
-  <div class="alert alert-info" v-if="shown">
+  <div v-if="shown" class="alert" :class="variant">
     <span>
       <slot>{{ message }}</slot>
     </span>
