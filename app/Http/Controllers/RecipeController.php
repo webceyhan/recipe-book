@@ -64,7 +64,9 @@ class RecipeController extends Controller
             })
         );
 
-        return redirect()->route('recipes.index');
+        return redirect()
+            ->route('recipes.index')
+            ->with('status', 'Recipe created.');
     }
 
     /**
@@ -127,7 +129,9 @@ class RecipeController extends Controller
 
         $recipe->update($data);
 
-        return redirect()->route('recipes.show', $recipe);
+        return redirect()
+            ->route('recipes.show', $recipe)
+            ->with('status', 'Recipe updated.');
     }
 
     /**
@@ -137,6 +141,8 @@ class RecipeController extends Controller
     {
         $recipe->delete();
 
-        return redirect()->route('recipes.index');
+        return redirect()
+            ->route('recipes.index')
+            ->with('status', 'Recipe deleted.');
     }
 }
