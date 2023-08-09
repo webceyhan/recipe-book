@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed } from "vue";
-import Button from "./Button.vue";
-import FormControl from "./FormControl.vue";
-import Input from "./Input.vue";
+import Button from "@/Components/Button.vue";
+import Input from "@/Components/Input.vue";
+import FormControl from "@/Components/FormControl.vue";
 
 const props = defineProps({
   ingredients: {

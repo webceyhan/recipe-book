@@ -3,7 +3,7 @@ import { Head, useForm } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import Button from "@/Components/Button.vue";
 import FormControl from "@/Components/FormControl.vue";
-import RecipeIngredientSelector from "@/Components/RecipeIngredientSelector.vue";
+import RecipeIngredientSelector from "./Partials/RecipeIngredientSelector.vue";
 
 const { recipe, ingredients, ingredientOptions } = defineProps({
   recipe: {

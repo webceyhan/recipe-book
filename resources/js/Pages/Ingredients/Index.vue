@@ -1,9 +1,9 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
-import IngredientList from "@/Components/IngredientList.vue";
-import Button from "@/Components/Button.vue";
+import GuestLayout from "@/Layouts/GuestLayout.vue";
 import Input from "@/Components/Input.vue";
+import Button from "@/Components/Button.vue";
+import IngredientList from "./Partials/IngredientList.vue";
 
 defineProps({
   ingredients: {
