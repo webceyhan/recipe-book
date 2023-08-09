@@ -1,8 +1,8 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
 import { onUnmounted } from "vue";
-import Badge from "./Badge.vue";
-import Button from "./Button.vue";
+import Badge from "@/Components/Badge.vue";
+import Button from "@/Components/Button.vue";
 
 defineEmits(["delete"]);
 

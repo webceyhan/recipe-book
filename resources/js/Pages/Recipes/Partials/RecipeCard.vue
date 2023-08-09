@@ -1,7 +1,7 @@
 <script setup>
-import Badge from "./Badge.vue";
-import Button from "./Button.vue";
-import Card from "./Card.vue";
+import Card from "@/Components/Card.vue";
+import Badge from "@/Components/Badge.vue";
+import Button from "@/Components/Button.vue";
 
 defineProps({
   recipe: {

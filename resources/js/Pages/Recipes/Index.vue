@@ -1,10 +1,10 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import RecipeCard from "@/Components/RecipeCard.vue";
-import RecipeSearchFilter from "@/Components/RecipeSearchFilter.vue";
-import RecipeCuisineFilter from "@/Components/RecipeCuisineFilter.vue";
 import Button from "@/Components/Button.vue";
+import RecipeCard from "./Partials/RecipeCard.vue";
+import RecipeSearchFilter from "./Partials/RecipeSearchFilter.vue";
+import RecipeCuisineFilter from "./Partials/RecipeCuisineFilter.vue";
 
 defineProps({
   recipes: {

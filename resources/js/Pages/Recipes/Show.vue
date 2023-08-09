@@ -1,9 +1,9 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import IngredientList from "@/Components/IngredientList.vue";
 import Badge from "@/Components/Badge.vue";
 import Button from "@/Components/Button.vue";
+import IngredientList from "@/Pages/Ingredients/Partials/IngredientList.vue";
 
 defineProps({
   recipe: {

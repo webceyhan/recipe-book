@@ -1,6 +1,6 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
-import Input from "./Input.vue";
+import Input from "@/Components/Input.vue";
 
 const handleSearch = (name) => {
   router.reload({
