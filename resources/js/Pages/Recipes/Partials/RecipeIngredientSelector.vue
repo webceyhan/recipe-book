@@ -3,6 +3,8 @@ import { ref, computed } from "vue";
 import Button from "@/Components/Button.vue";
 import Input from "@/Components/Input.vue";
 import FormControl from "@/Components/FormControl.vue";
+import List from "@/Components/List.vue";
+import ListItem from "@/Components/ListItem.vue";
 
 const props = defineProps({
   ingredients: {
@@ -42,7 +44,7 @@ function removeIngredient(index) {
 </script>
 
 <template>
-  <section>
+  <section class="space-y-4">
     <div class="flex items-end gap-x-4">
       <FormControl
         label="Select ingredient"
@@ -53,18 +55,14 @@ function removeIngredient(index) {
       <Button ghost @click="addIngredient()"> add new ingredient </Button>
     </div>
 
-    <ul class="divide-y divide-y-1 divide-gray-200">
-      <li
-        v-for="(ingredient, i) in ingredients"
-        class="flex items-center justify-between py-2 max-w-md space-x-4"
-        :key="i"
-      >
+
+
+    <List>
+      <ListItem v-for="(ingredient, i) in ingredients" :key="i">
         <span class="w-full" v-html="ingredient.name" />
-
-        <Input type="number" class="w-24" v-model="ingredient.quantity" />
-
+        <Input type="number" class="input-sm w-24" v-model="ingredient.quantity" />
         <Button danger small @click="removeIngredient(i)">x</Button>
-      </li>
-    </ul>
+      </ListItem>
+    </List>
   </section>
 </template>
