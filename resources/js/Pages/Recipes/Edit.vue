@@ -54,19 +54,21 @@ function handleSubmit() {
 
     <h1 class="text-3xl bold capitalize">{{ title }}</h1>
 
-    <form class="w-full space-y-4" @submit.prevent>
-      <!-- name -->
-      <FormControl label="Recipe Name" v-model="form.name" />
+    <form class="grid lg:grid-cols-2 w-full gap-4" @submit.prevent>
+      <div class="space-y-4">
+        <!-- name -->
+        <FormControl label="Recipe Name" v-model="form.name" />
 
-      <!-- picture -->
-      <FormControl label="Upload picture" type="file" v-model="form.picture" />
+        <!-- picture -->
+        <FormControl label="Upload picture" type="file" v-model="form.picture" />
 
-      <!-- cuisine -->
-      <FormControl
-        label="Select cuisine"
-        :options="cuisineOptions"
-        v-model="form.cuisine"
-      />
+        <!-- cuisine -->
+        <FormControl
+          label="Select cuisine"
+          :options="cuisineOptions"
+          v-model="form.cuisine"
+        />
+      </div>
 
       <!-- ingredients -->
       <RecipeIngredientSelector
@@ -75,10 +77,15 @@ function handleSubmit() {
       />
 
       <!-- instructions -->
-      <FormControl label="Instructions" rows="5" v-model="form.instructions" />
+      <FormControl
+        class="col-span-full"
+        label="Instructions"
+        rows="5"
+        v-model="form.instructions"
+      />
 
       <!-- actions -->
-      <div class="flex justify-end gap-4">
+      <div class="col-span-full flex justify-end gap-4">
         <Button @click="back()" ghost>Cancel</Button>
         <Button @click="handleSubmit()"> Save </Button>
       </div>
