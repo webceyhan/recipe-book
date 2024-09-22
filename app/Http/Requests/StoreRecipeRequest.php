@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Cuisine;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRecipeRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreRecipeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,10 @@ class StoreRecipeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string'],
+            'cuisine' => ['required', 'string', Rule::in(Cuisine::values())],
+            'instructions' => ['required', 'string'],
+            'ingredients' => ['required', 'array'],
         ];
     }
 }

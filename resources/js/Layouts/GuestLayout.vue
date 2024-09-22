@@ -1,17 +1,52 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import Alert from "@/Components/Alert.vue";
+
+const links = [
+  {
+    name: "Recipes",
+    route: "recipes.index",
+  },
+  {
+    name: "Ingredients",
+    route: "ingredients.index",
+  },
+];
 </script>
 
 <template>
   <div class="w-full max-w-5xl mx-auto p-8 space-y-8">
-    <header class="flex items-center gap-x-4 shadow">
-      <Link href="/">Home </Link>
-      <Link :href="route('recipes.index')">Recipes</Link>
-      <Link :href="route('ingredients.index')">Ingredients</Link>
-    </header>
+    <!-- main navigation -->
+    <nav class="navbar bg-base-100 rounded-lg shadow-lg">
+      <div class="flex-none">
+        <!-- logo -->
+        <Link
+          :href="route('home')"
+          class="btn btn-ghost normal-case text-xl"
+          :class="{ '!btn-neutral': route().current('home') }"
+        >
+          Home
+        </Link>
+      </div>
+      <div class="navbar-center">
+        <ul class="menu menu-horizontal px-1">
+          <li v-for="(link, i) in links" :key="1">
+            <Link
+              :href="route(link.route)"
+              :class="{ active: route().current(link.route) }"
+              v-html="link.name"
+            />
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-    <main class="w-full space-y-4">
+    <main class="w-full space-y-8">
       <slot />
     </main>
+
+    <div class="toast">
+      <Alert :message="$page.props.status" flashable />
+    </div>
   </div>
 </template>

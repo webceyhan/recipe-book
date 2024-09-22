@@ -13,7 +13,7 @@ class IngredientPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class IngredientPolicy
      */
     public function view(User $user, Ingredient $ingredient): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class IngredientPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,15 +37,16 @@ class IngredientPolicy
      */
     public function update(User $user, Ingredient $ingredient): bool
     {
-        //
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Ingredient $ingredient): bool
+    public function delete(?User $user, Ingredient $ingredient): bool
     {
-        //
+        // allow if ingredient has no recipes
+        return $ingredient->recipes->count() === 0;
     }
 
     /**
@@ -53,7 +54,7 @@ class IngredientPolicy
      */
     public function restore(User $user, Ingredient $ingredient): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +62,6 @@ class IngredientPolicy
      */
     public function forceDelete(User $user, Ingredient $ingredient): bool
     {
-        //
+        return true;
     }
 }
